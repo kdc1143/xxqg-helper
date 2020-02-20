@@ -289,7 +289,7 @@ function articleStudy()
  * @param: vCount,vTime
  * @return: null
  */
-function videoStudy_bailing(vCount,vTime)
+function videoStudy_bailing()
 {
     h=device.height;//屏幕高
     w=device.width;//屏幕宽
@@ -301,16 +301,16 @@ function videoStudy_bailing(vCount,vTime)
     delay(2);
     click("竖");
     delay(2);
-    var a=className("FrameLayout").depth(23).findOnce(0);//根据控件搜索视频框，但部分手机不适配，改用下面坐标点击
-    a.click();
-    //click((w/2)+random()*10,h/4);//坐标点击第一个视频
+    //var a=className("FrameLayout").depth(23).findOnce(0);//根据控件搜索视频框，但部分手机不适配，改用下面坐标点击
+    //a.click();
+    click((w/2)+random()*10,h/4);//坐标点击第一个视频
     delay(1);
     for(var i=0;i<vCount;i++)
     {
         console.log("正在观看第"+(i+1)+"个小视频");
         video_timing_bailing(i,vTime);//观看每个小视频
         if(i!=vCount-1){
-            swipe(x,h1,x,h2,500);//往下翻（纵坐标从5/6处滑到1/6处）
+            Swipe(x,h1,x,h2,500);//往下翻（纵坐标从5/6处滑到1/6处）
         }
     }
     back();
