@@ -503,8 +503,10 @@ function main()
     start_app();//启动app
     var start=new Date().getTime();//程序开始时间
     localChannel()//本地频道
+    console.hide();//隐藏控制台，避免搜索答案时控制台覆盖导致搜索答案失败
     challengeQuestion();//挑战答题
     dailyQuestion();//每日答题
+    console.show();
     videoStudy_news();//看小视频
     listenToRadio();//听电台广播
     var r_start=new Date().getTime();//广播开始时间
