@@ -192,6 +192,10 @@ function getYestardayDateString()
  */
 function articleStudy()
 {
+    if(currentPackage()!="cn.xuexi.android") {
+        app.launchPackage("cn.xuexi.android");
+        sleep(1000);
+    }
     while(!desc("学习").exists());//等待加载出主页
     desc("学习").click();//点击主页正下方的"学习"按钮
     delay(2);
@@ -291,6 +295,10 @@ function articleStudy()
  */
 function videoStudy_bailing()
 {
+    if(currentPackage()!="cn.xuexi.android") {
+        app.launchPackage("cn.xuexi.android");
+        sleep(1000);
+    }
     h=device.height;//屏幕高
     w=device.width;//屏幕宽
     x=(w/3)*2;//横坐标2分之3处
@@ -324,6 +332,10 @@ function videoStudy_bailing()
  */
 function videoStudy_news()
 {
+    if(currentPackage()!="cn.xuexi.android") {
+        app.launchPackage("cn.xuexi.android");
+        sleep(1000);
+    }
     click("电视台");
     delay(2)
     click("联播频道");
@@ -368,6 +380,10 @@ function videoStudy_news()
  */
 function listenToRadio()
 {
+    if(currentPackage()!="cn.xuexi.android") {
+        app.launchPackage("cn.xuexi.android");
+        sleep(1000);
+    }
     click("电台");
     delay(2);
     click("听新闻广播");
