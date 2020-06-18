@@ -4,7 +4,13 @@ importClass(org.jsoup.Jsoup);
 importClass(org.jsoup.nodes.Document);
 importClass(org.jsoup.select.Elements);
 */
-
+sleep(500);
+if (engines.all().length > 1) exit();
+if (!confirm("开始运行？")) exit();
+device.setMusicVolume(0);
+device.setBrightnessMode(0);
+sleep(200);
+device.setBrightness(8);
 importClass(android.database.sqlite.SQLiteDatabase);
 
 /**
@@ -125,7 +131,7 @@ function radio_timing(r_time, seconds) {
         }
         if (i % 15 == 0)//每15秒弹一次窗防止息屏
         {
-            toast("这是防息屏弹窗，可忽略-. -");
+            //toast("这是防息屏弹窗，可忽略-. -");
         }
     }
 }
@@ -285,7 +291,7 @@ function articleStudy() {
  * @param: vCount,vTime
  * @return: null
  */
-function videoStudy_bailing(vCount, vTime) {
+function videoStudy_bailing() {
     h = device.height;//屏幕高
     w = device.width;//屏幕宽
     x = (w / 3) * 2;//横坐标2分之3处
@@ -296,15 +302,15 @@ function videoStudy_bailing(vCount, vTime) {
     delay(2);
     click("竖");
     delay(2);
-    var a = className("FrameLayout").depth(23).findOnce(0);//根据控件搜索视频框，但部分手机不适配，改用下面坐标点击
-    a.click();
-    //click((w/2)+random()*10,h/4);//坐标点击第一个视频
+    //var a = className("FrameLayout").depth(23).findOnce(0);//根据控件搜索视频框，但部分手机不适配，改用下面坐标点击
+    //a.click();
+    click((w/2)+random()*10,h/4);//坐标点击第一个视频
     delay(1);
     for (var i = 0; i < vCount; i++) {
         console.log("正在观看第" + (i + 1) + "个小视频");
         video_timing_bailing(i, vTime);//观看每个小视频
         if (i != vCount - 1) {
-            swipe(x, h1, x, h2, 500);//往下翻（纵坐标从5/6处滑到1/6处）
+            Swipe(x, h1, x, h2, 500);//往下翻（纵坐标从5/6处滑到1/6处）
         }
     }
     back();
@@ -556,7 +562,7 @@ function main() {
         dailyQuestion();//每日答题
     }
     if (vCount != 0) {
-        videoStudy_news();//看视频
+        videoStudy_bailing();//看视频
     }
     if (rTime != 0) {
         listenToRadio();//听电台广播
@@ -576,7 +582,9 @@ function main() {
 
 auto.waitFor();//等待获取无障碍辅助权限
 main();
-
+main();
+device.setBrightnessMode(1);
+home();
 
 /*************************************************挑战答题部分******************************************************/
 /**
@@ -771,8 +779,8 @@ function challengeQuestion() {
                 break;
             }
             else {
-                console.log("等10秒开始下一轮...")
-                delay(8);//等待10秒才能开始下一轮
+                console.log("等3秒开始下一轮...")
+                delay(1);//等待3秒才能开始下一轮
                 back();
                 //desc("结束本局").click();//有可能找不到结束本局字样所在页面控件，所以直接返回到上一层
                 delay(1);
@@ -804,7 +812,7 @@ function challengeQuestion() {
  * @return: questionArray
  */
 function getFitbQuestion() {
-    var questionCollections = className("EditText").findOnce().parent();
+    var questionCollections = className("EditText").findOnce().parent().parent();
     var questionArray = [];
     var findBlank = false;
     var blankCount = 0;
@@ -821,7 +829,7 @@ function getFitbQuestion() {
             }
             else {
                 findBlank = true;
-                blankCount += 1;
+                blankCount = (className("EditText").findOnce().parent().childCount() - 1);;
             }
         }
     });
